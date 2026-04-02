@@ -1,0 +1,44 @@
+appId: com.marnickvda.drawspace
+productName: Drawspace
+directories:
+  buildResources: build
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintcache,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+asarUnpack:
+  - resources/**
+fileAssociations:
+  - ext: excalidraw
+    name: Excalidraw Drawing
+    description: Excalidraw drawing file
+    mimeType: application/json
+    role: Editor
+win:
+  executableName: Drawspace
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: always
+mac:
+  identity: null
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    - NSDocumentsFolderUsageDescription: Drawspace needs access to your Documents folder to manage workspaces.
+    - NSDownloadsFolderUsageDescription: Drawspace needs access to your Downloads folder to export files.
+  notarize: false
+dmg:
+  artifactName: ${name}-${version}.${ext}
+linux:
+  target:
+    - AppImage
+    - deb
+  maintainer: drawspace
+  category: Graphics
+appImage:
+  artifactName: ${name}-${version}.${ext}
+npmRebuild: false
